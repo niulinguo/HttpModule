@@ -43,8 +43,10 @@ public class RetrofitApiFactory {
             builder
                     .addInterceptor(HTTP_LOGGING_INTERCEPTOR);
         } else {
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(httpConfig.getLogger());
+            loggingInterceptor.setLevel(httpConfig.getLevel());
             builder
-                    .addInterceptor(new HttpLoggingInterceptor(httpConfig.getLogger()));
+                    .addInterceptor(loggingInterceptor);
         }
         OkHttpClient okHttpClient = builder.build();
 

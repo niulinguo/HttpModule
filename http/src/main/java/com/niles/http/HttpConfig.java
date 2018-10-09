@@ -14,13 +14,15 @@ public class HttpConfig {
     private final long mReadTimeout;
     private final long mWriteTimeout;
     private final HttpLoggingInterceptor.Logger mLogger;
+    private final HttpLoggingInterceptor.Level mLevel;
 
-    private HttpConfig(String baseUrl, long connectTimeout, long readTimeout, long writeTimeout, HttpLoggingInterceptor.Logger logger) {
+    private HttpConfig(String baseUrl, long connectTimeout, long readTimeout, long writeTimeout, HttpLoggingInterceptor.Logger logger, HttpLoggingInterceptor.Level level) {
         mBaseUrl = baseUrl;
         mConnectTimeout = connectTimeout;
         mReadTimeout = readTimeout;
         mWriteTimeout = writeTimeout;
         mLogger = logger;
+        mLevel = level;
     }
 
     long getConnectTimeout() {
@@ -35,6 +37,10 @@ public class HttpConfig {
         return mWriteTimeout;
     }
 
+    HttpLoggingInterceptor.Level getLevel() {
+        return mLevel;
+    }
+
     HttpLoggingInterceptor.Logger getLogger() {
         return mLogger;
     }
@@ -46,6 +52,7 @@ public class HttpConfig {
     public static final class Builder {
 
         private HttpLoggingInterceptor.Logger mLogger;
+        private HttpLoggingInterceptor.Level mLevel = HttpLoggingInterceptor.Level.BODY;
         private String mBaseUrl;
         private long mConnectTimeout = 10000;
         private long mReadTimeout = 10000;
@@ -57,6 +64,15 @@ public class HttpConfig {
 
         public Builder setBaseUrl(String baseUrl) {
             mBaseUrl = baseUrl;
+            return this;
+        }
+
+        public HttpLoggingInterceptor.Level getLevel() {
+            return mLevel;
+        }
+
+        public Builder setLevel(HttpLoggingInterceptor.Level level) {
+            mLevel = level;
             return this;
         }
 
@@ -102,7 +118,8 @@ public class HttpConfig {
                     mConnectTimeout,
                     mReadTimeout,
                     mWriteTimeout,
-                    mLogger
+                    mLogger,
+                    mLevel
             );
         }
     }
