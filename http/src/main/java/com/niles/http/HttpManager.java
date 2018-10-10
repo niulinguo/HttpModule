@@ -7,13 +7,18 @@ package com.niles.http;
  */
 public class HttpManager {
 
-    private static HttpConfig sHttpConfig;
+    private HttpConfig mHttpConfig;
 
-    public static void setHttpConfig(HttpConfig httpConfig) {
-        sHttpConfig = httpConfig;
+    public HttpConfig getHttpConfig() {
+        return mHttpConfig;
     }
 
-    public static <S> S createService(Class<S> serviceClass) {
-        return RetrofitApiFactory.create(sHttpConfig, serviceClass);
+    public HttpManager setHttpConfig(HttpConfig httpConfig) {
+        mHttpConfig = httpConfig;
+        return this;
+    }
+
+    public <S> S createService(Class<S> serviceClass) {
+        return RetrofitApiFactory.create(mHttpConfig, serviceClass);
     }
 }
