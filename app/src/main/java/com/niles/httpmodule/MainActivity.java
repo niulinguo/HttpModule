@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.niles.http.HttpConfig;
-import com.niles.http.RetrofitApiFactory;
+import com.niles.http.HttpManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
                 .setBaseUrl("http://www.baidu.com")
                 .build();
 
-        ApiService apiService = RetrofitApiFactory.create(httpConfig, ApiService.class);
+        HttpManager.setHttpConfig(httpConfig);
+        ApiService apiService = HttpManager.createService(ApiService.class);
     }
 }
