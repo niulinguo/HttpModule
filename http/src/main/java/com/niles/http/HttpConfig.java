@@ -1,6 +1,10 @@
 package com.niles.http;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Converter;
 
 /**
  * Created by Niles
@@ -15,14 +19,20 @@ public class HttpConfig {
     private final long mWriteTimeout;
     private final HttpLoggingInterceptor.Logger mLogger;
     private final HttpLoggingInterceptor.Level mLevel;
+    private final List<Converter.Factory> mConverterFactoryList;
 
-    private HttpConfig(String baseUrl, long connectTimeout, long readTimeout, long writeTimeout, HttpLoggingInterceptor.Logger logger, HttpLoggingInterceptor.Level level) {
+    private HttpConfig(String baseUrl, long connectTimeout, long readTimeout, long writeTimeout, HttpLoggingInterceptor.Logger logger, HttpLoggingInterceptor.Level level, List<Converter.Factory> converterFactoryList) {
         mBaseUrl = baseUrl;
         mConnectTimeout = connectTimeout;
         mReadTimeout = readTimeout;
         mWriteTimeout = writeTimeout;
         mLogger = logger;
         mLevel = level;
+        mConverterFactoryList = converterFactoryList;
+    }
+
+    List<Converter.Factory> getConverterFactoryList() {
+        return mConverterFactoryList;
     }
 
     long getConnectTimeout() {
@@ -57,6 +67,7 @@ public class HttpConfig {
         private long mConnectTimeout = 10000;
         private long mReadTimeout = 10000;
         private long mWriteTimeout = 10000;
+        private List<Converter.Factory> mConverterFactoryList = new ArrayList<>();
 
         public String getBaseUrl() {
             return mBaseUrl;
@@ -112,6 +123,11 @@ public class HttpConfig {
             return this;
         }
 
+        public Builder addConverterFactory(Converter.Factory factory) {
+            mConverterFactoryList.add(factory);
+            return this;
+        }
+
         public HttpConfig build() {
             return new HttpConfig(
                     mBaseUrl,
@@ -119,7 +135,8 @@ public class HttpConfig {
                     mReadTimeout,
                     mWriteTimeout,
                     mLogger,
-                    mLevel
+                    mLevel,
+                    mConverterFactoryList
             );
         }
     }

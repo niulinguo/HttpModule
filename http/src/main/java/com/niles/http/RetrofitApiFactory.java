@@ -3,13 +3,13 @@ package com.niles.http;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Niles
@@ -28,7 +28,6 @@ public class RetrofitApiFactory {
             }
         }
     });
-    private static final Converter.Factory GSON_CONVERTER_FACTORY = GsonConverterFactory.create();
 
     static {
         HTTP_LOGGING_INTERCEPTOR.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -50,11 +49,16 @@ public class RetrofitApiFactory {
         }
         OkHttpClient okHttpClient = builder.build();
 
-        return new Retrofit.Builder()
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl(httpConfig.getBaseUrl())
-                .addConverterFactory(GSON_CONVERTER_FACTORY)
-                .build();
+                .baseUrl(httpConfig.getBaseUrl());
+        List<Converter.Factory> converterFactoryList = httpConfig.getConverterFactoryList();
+        if (!converterFactoryList.isEmpty()) {
+            for (Converter.Factory factory : converterFactoryList) {
+                retrofitBuilder.addConverterFactory(factory);
+            }
+        }
+        return retrofitBuilder.build();
     }
 
     public static <S> S create(HttpConfig httpConfig, Class<S> serviceClass) {
