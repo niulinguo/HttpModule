@@ -31,31 +31,35 @@ public class HttpConfig {
         mConverterFactoryList = converterFactoryList;
     }
 
-    List<Converter.Factory> getConverterFactoryList() {
+    public Builder newBuilder() {
+        return new Builder(this);
+    }
+
+    public List<Converter.Factory> getConverterFactoryList() {
         return mConverterFactoryList;
     }
 
-    long getConnectTimeout() {
+    public long getConnectTimeout() {
         return mConnectTimeout;
     }
 
-    long getReadTimeout() {
+    public long getReadTimeout() {
         return mReadTimeout;
     }
 
-    long getWriteTimeout() {
+    public long getWriteTimeout() {
         return mWriteTimeout;
     }
 
-    HttpLoggingInterceptor.Level getLevel() {
+    public HttpLoggingInterceptor.Level getLevel() {
         return mLevel;
     }
 
-    HttpLoggingInterceptor.Logger getLogger() {
+    public HttpLoggingInterceptor.Logger getLogger() {
         return mLogger;
     }
 
-    String getBaseUrl() {
+    public String getBaseUrl() {
         return mBaseUrl;
     }
 
@@ -68,6 +72,19 @@ public class HttpConfig {
         private long mReadTimeout = 10000;
         private long mWriteTimeout = 10000;
         private List<Converter.Factory> mConverterFactoryList = new ArrayList<>();
+
+        public Builder() {
+        }
+
+        public Builder(HttpConfig httpConfig) {
+            mLogger = httpConfig.getLogger();
+            mLevel = httpConfig.getLevel();
+            mBaseUrl = httpConfig.getBaseUrl();
+            mConnectTimeout = httpConfig.getConnectTimeout();
+            mReadTimeout = httpConfig.getReadTimeout();
+            mWriteTimeout = httpConfig.getWriteTimeout();
+            mConverterFactoryList.addAll(httpConfig.getConverterFactoryList());
+        }
 
         public String getBaseUrl() {
             return mBaseUrl;
