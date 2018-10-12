@@ -9,7 +9,6 @@ import retrofit2.http.GET;
  * Email niulinguo@163.com
  */
 public interface ApiService {
-
     @GET("/")
     Call<String> baidu();
 }

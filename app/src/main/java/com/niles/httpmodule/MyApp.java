@@ -16,7 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public class MyApp extends Application {
 
-    private final HttpManager mHttpManager = new HttpManager();
+    private HttpManager mHttpManager = new HttpManager();
 
     @Override
     public void onCreate() {
@@ -33,7 +33,8 @@ public class MyApp extends Application {
                 .addConverterFactory(StringConverterFactory.create())
                 .build();
 
-        mHttpManager.setHttpConfig(httpConfig);
+        mHttpManager = new HttpManager()
+                .setHttpConfig(httpConfig);
     }
 
     public <S> S getService(Class<S> serviceClass) {
