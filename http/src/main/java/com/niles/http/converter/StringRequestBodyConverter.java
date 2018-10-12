@@ -14,7 +14,6 @@ import retrofit2.Converter;
 public class StringRequestBodyConverter implements Converter<String, RequestBody> {
 
     private static final MediaType MEDIA_TYPE = MediaType.parse("text/plain; charset=UTF-8");
-//    private static final Charset UTF_8 = Charset.forName("UTF-8");
 
     @Override
     public RequestBody convert(@NonNull String value) {

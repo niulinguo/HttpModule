@@ -18,7 +18,10 @@ public class HttpManager {
         return this;
     }
 
-    public <S> S createService(Class<S> serviceClass) {
-        return RetrofitApiFactory.create(mHttpConfig, serviceClass);
+    public <S> S getService(Class<S> serviceClass) {
+        if (mHttpConfig == null) {
+            throw new RuntimeException("HttpConfig Is Null");
+        }
+        return RetrofitServiceFactory.getService(mHttpConfig, serviceClass);
     }
 }

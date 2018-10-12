@@ -15,7 +15,6 @@ import retrofit2.Converter;
 public class StringResponseBodyConverter implements Converter<ResponseBody, String> {
     @Override
     public String convert(@NonNull ResponseBody value) throws IOException {
-        byte[] bytes = value.bytes();
-        return new String(bytes);
+        return new String(value.bytes());
     }
 }

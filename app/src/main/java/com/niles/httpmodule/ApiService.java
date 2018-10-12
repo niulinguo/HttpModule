@@ -10,6 +10,6 @@ import retrofit2.http.GET;
  */
 public interface ApiService {
 
-    @GET("/index")
+    @GET("/")
     Call<String> baidu();
 }
