@@ -6,8 +6,8 @@ android {
         applicationId "com.niles.httpmodule"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 7
-        versionName "1.6"
+        versionCode 8
+        versionName "1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -40,5 +40,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':http')
-//    implementation 'com.github.niulinguo:HttpModule:v1.6'
+//    implementation 'com.github.niulinguo:HttpModule:v1.7'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.google.code.gson:gson:2.8.5'
 }

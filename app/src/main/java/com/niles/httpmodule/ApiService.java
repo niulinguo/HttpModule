@@ -2,6 +2,7 @@ package com.niles.httpmodule;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by Niles
@@ -10,5 +11,5 @@ import retrofit2.http.GET;
  */
 public interface ApiService {
     @GET("/")
-    Call<String> baidu();
+    Call<String> baidu(@Query("name") String name, @Query("age") int age);
 }

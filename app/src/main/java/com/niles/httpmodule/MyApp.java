@@ -8,6 +8,7 @@ import com.niles.http.HttpManager;
 import com.niles.http.converter.StringConverterFactory;
 
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Niles
@@ -31,6 +32,7 @@ public class MyApp extends Application {
                     }
                 })
                 .addConverterFactory(StringConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         mHttpManager = new HttpManager()

@@ -24,11 +24,17 @@ public class StringConverterFactory extends Converter.Factory {
 
     @Override
     public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
-        return new StringRequestBodyConverter();
+        if (type == String.class) {
+            return new StringRequestBodyConverter();
+        }
+        return null;
     }
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-        return new StringResponseBodyConverter();
+        if (type == String.class) {
+            return new StringResponseBodyConverter();
+        }
+        return null;
     }
 }
