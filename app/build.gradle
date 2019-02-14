@@ -6,8 +6,8 @@ android {
         applicationId "com.niles.httpmodule"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 8
-        versionName "1.7"
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
