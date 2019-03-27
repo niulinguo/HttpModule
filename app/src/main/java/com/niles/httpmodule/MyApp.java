@@ -7,7 +7,6 @@ import com.niles.http.HttpConfig;
 import com.niles.http.HttpManager;
 import com.niles.http.converter.StringConverterFactory;
 
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -25,18 +24,12 @@ public class MyApp extends Application {
 
         HttpConfig httpConfig = new HttpConfig.Builder()
                 .setBaseUrl("http://www.baidu.com")
-                .setLogger(new HttpLoggingInterceptor.Logger() {
-                    @Override
-                    public void log(String message) {
-                        Log.e("http", message);
-                    }
-                })
+                .setLogger(message -> Log.e("http", message))
                 .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        mHttpManager = new HttpManager()
-                .setHttpConfig(httpConfig);
+        mHttpManager = new HttpManager().setHttpConfig(httpConfig);
     }
 
     public <S> S getService(Class<S> serviceClass) {
