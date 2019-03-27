@@ -16,7 +16,7 @@ import retrofit2.Retrofit;
  * Date 2018/10/9 14:06
  * Email niulinguo@163.com
  */
-class RetrofitServiceFactory {
+public class RetrofitServiceFactory {
 
     private static final HashMap<HttpConfig, Retrofit> RETROFIT_MAP = new HashMap<>();
     private static final HashMap<HttpConfig, HashMap<Class, Object>> SERVICE_MAP = new HashMap<>();
@@ -97,7 +97,7 @@ class RetrofitServiceFactory {
         return retrofit;
     }
 
-    static <S> S getService(HttpConfig config, Class<S> serviceClass) {
+    public static <S> S getService(HttpConfig config, Class<S> serviceClass) {
         HashMap<Class, Object> serviceMap = SERVICE_MAP.get(config);
         if (serviceMap == null) {
             SERVICE_MAP.put(config, serviceMap = new HashMap<>());
